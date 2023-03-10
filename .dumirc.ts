@@ -1,10 +1,48 @@
+
+// @ts-nocheck
+
 import { defineConfig } from 'dumi'
-import path from 'path'
+import path, { join } from 'path'
+import { readdirSync } from 'fs';
 
 const BASE_URL = '' // 'react-admin' // '/lemon'
 
+const headPkgList = [];
+
+// const pkgList = readdirSync(join(__dirname, '/packages')).filter(
+//   (pkg) => pkg.charAt(0) !== '.' && !headPkgList.includes(pkg),
+// );
+// const alias = pkgList.reduce((pre, pkg) => {
+//   pre[`@vis/${pkg}`] = join(__dirname, '/packages', pkg, 'src');
+//   return {
+//     ...pre,
+//   };
+// }, {});
+
+
+// export default defineConfig({
+//   chainWebpack: (memo, { env, webpack, createCSSRule }) => {
+//     memo.plugins.delete('copy')
+//   },
+//   extraBabelPlugins: [
+//     [
+//       'babel-plugin-import',
+//       {
+//         libraryName: 'antd',
+//         libraryDirectory: 'es',
+//         style: true
+//       },
+//       'antd'
+//     ],
+//   ],
+//   alias: {
+//     comp: require.resolve('./src'),
+//     // '@vis/components': join(__dirname, 'src')
+//   }
+// })
+
 export default defineConfig({
-  mode: 'site', // site: 站点模式（导航头 + 左侧菜单 + 右侧内容）。 doc：文档
+  // mode: 'site', // site: 站点模式（导航头 + 左侧菜单 + 右侧内容）。 doc：文档
   title: 'React-Admin Component', // 组件库名称
   // # favicon 配置项升级
   favicons: [BASE_URL + '/images/logo.png'],
@@ -21,36 +59,40 @@ export default defineConfig({
   // 配置 antd 按需加载
   extraBabelPlugins: [
     [
-      'import',
+      'babel-plugin-import',
       {
         libraryName: 'antd',
         libraryDirectory: 'es',
         style: true
-      }
+      },
+      'antd'
     ]
   ],
   theme: { '@c-primary': '#1DA57A' },
   chainWebpack: (memo, { env, webpack, createCSSRule }) => {
     memo.plugins.delete('copy')
-    console.log('memo.resolve.alias', __dirname)
-    memo.module
-      .rule('js')
-      .test(/\.(js|mjs|jsx|ts|tsx)$/)
-      .include.add(path.join(__dirname, '..', 'src'))
-      .end()
-      .exclude.add(/node_modules/)
-      .end()
-      .use('babel-loader')
-    // memo.resolve.alias.set('@', path.join(__dirname, './src'))
-    // memo.resolve.alias.set('assets', path.join(__dirname, './src/assets'))
-    // memo.resolve.alias.set('utils', path.join(__dirname, './src/utils'))
-    // memo.resolve.alias.set('comp', path.join(__dirname, '..', 'src', 'components'))
+    // memo.module
+    //   .rule('js')
+    //   .test(/\.(js|mjs|jsx|ts|tsx)$/)
+    //   .include.add(path.join(__dirname, '..', '..', '..', '..'))
+    //   .end()
+    //   .exclude.add(/node_modules/)
+    //   .end()
+    //   .use('babel-loader')
+    // debugger
+    // console.log('memo.resolve.alias', memo.resolve.alias)
+
+    // // memo.resolve.alias.set('@', path.join(__dirname, './src'))
+    // // memo.resolve.alias.set('assets', path.join(__dirname, './src/assets'))
+    // // memo.resolve.alias.set('utils', path.join(__dirname, './src/utils'))
+    // memo.resolve.alias.set('comp', path.join(__dirname,  '..', '..', '..', '..', 'src', 'components'))
   },
 
   alias: {
     // comp: require.resolve('../../src/components'),
     // components: '../../src/components',
-    comp: path.join(__dirname, '..', 'src', 'components')
+    // comp: path.join(__dirname, '..', 'src', 'components')
+    comp: require.resolve('./src'),
   },
   // ----主题配置------
   themeConfig: {
@@ -113,8 +155,8 @@ export default defineConfig({
   // apiParser: {},
   resolve: {
     // 配置入口文件路径，API 解析将从这里开始
-    entryFile: './src/components/index.ts',
-    docDirs: ['docs', path.resolve(__dirname, 'dumi/docs')]
-    // atomDirs: [{ type: 'component', dir: './src/components' }]
+    entryFile: './src/components/index.js',
+    // docDirs: ['dumi/docs'],
+    atomDirs: [{ type: 'components', dir: './src/components' }]
   }
 })

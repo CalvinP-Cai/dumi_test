@@ -1,0 +1,24 @@
+/*
+ * @Author: CaiPeng
+ * @Date: 2023-03-10 16:11:26
+ * @LastEditors: caipeng
+ * @LastEditTime: 2023-03-10 17:26:09
+ * @FilePath: \React\init\tsconfig.json
+ * @Description: 
+ */
+{
+  "compilerOptions": {
+    "strict": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@@/*": [".dumi/tmp/*"],
+      "src": ["src"],
+      "@src/*": ["src/*", "*"]
+    }
+  },
+  "include": ["dumi/**/*", "dumirc.ts", "src/**/*"]
+}
