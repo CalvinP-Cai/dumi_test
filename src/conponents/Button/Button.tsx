@@ -2,36 +2,36 @@
  * @Author: CaiPeng
  * @Date: 2023-03-09 11:21:22
  * @LastEditors: caipeng
- * @LastEditTime: 2023-03-09 11:27:20
- * @FilePath: \React\init\src\conponents\Button\Button.jsx
+ * @LastEditTime: 2023-03-13 16:49:22
+ * @FilePath: \React\init\src\conponents\Button\Button.tsx
  * @Description: 
  */
-import React from 'react'
+import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from 'react'
 import classNames from 'classnames'
 
-// export type ButtonSize = 'lg' | 'sm'
+export type ButtonSize = 'lg' | 'sm'
 
-// export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
+export type ButtonType = 'primary' | 'default' | 'danger' | 'link'
 
-// interface BaseButtonProps {
-//   className?: string;
-//   /**设置 Button 的禁用 */
-//   disabled?: boolean;
-//   /**设置 Button 的尺寸 */
-//   size?: ButtonSize;
-//   /**设置 Button 的类型 */
-//   btnType?: ButtonType;
-//   children: React.ReactNode;
-//   href?: string;
-// }
-// // ButtonHTMLAttributes 是button所有原生属性类型
-// type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>
-// // a 链接原生属性
-// type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>
-// // TS Utility Types : Partial 属性可选，并不是都有的
-// export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
+interface BaseButtonProps {
+  className?: string;
+  /**设置 Button 的禁用 */
+  disabled?: boolean;
+  /**设置 Button 的尺寸 */
+  size?: ButtonSize;
+  /**设置 Button 的类型 */
+  btnType?: ButtonType;
+  children: React.ReactNode;
+  href?: string;
+}
+// ButtonHTMLAttributes 是button所有原生属性类型
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>
+// a 链接原生属性
+type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>
+// TS Utility Types : Partial 属性可选，并不是都有的
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
-export const Button= (props) => {
+export const Button: FC<ButtonProps> = (props) => {
   const {
     btnType,
     className, // 用户自定义className
