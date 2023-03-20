@@ -39,13 +39,13 @@ export default defineConfig({
     comp: require.resolve('./src'),
     // '@vis/components': join(__dirname, 'src')
   },
-  // apiParser: {},
-  // resolve: {
-  //   // 配置入口文件路径，API 解析将从这里开始
-  //   entryFile: './src/components/index.ts',
-  //   // docDirs: ['dumi/docs'],
-  //   // atomDirs: [{ type: 'component', dir: './src/components' }]
-  // }
+  apiParser: {},
+  resolve: {
+    // 配置入口文件路径，API 解析将从这里开始
+    entryFile: './src/components/index.ts',
+    // docDirs: ['dumi/docs'],
+    atomDirs: [{ type: 'component', dir: './src/components' }]
+  }
 })
 
 // export default defineConfig({
